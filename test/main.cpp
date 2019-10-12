@@ -39,6 +39,7 @@ void setup()
 {
   Serial.begin(115200);
   while(!Serial); //Needed for printing correctly when using a Teensy
+  Serial.println("Sketch is called ESP32BME280Example5_ReadAllRegistersPIO");
 
   Wire.begin();
   
