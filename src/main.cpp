@@ -25,7 +25,8 @@ BME280 mySensor;
 BME280 mySensor1;
 
 // Constants that appear in the serial message.
-const String mDELIMETER = ",";            // cordoba add-in expects a comma delimeted string
+const String mDELIMETER = ",";    // cordoba add-in expects a comma delimeted string, added for connection to Excel
+const int delayRead = 1000;      // Delay between readings
 
 //Given a value, print it in HEX with leading 0x and any leading 0s
 void printyPrintHex(byte value)
@@ -35,35 +36,9 @@ void printyPrintHex(byte value)
   Serial.println(value, HEX);
 }
 
-void setup()
+void printRegisters()
 {
-  Serial.begin(115200);
-  while(!Serial); //Needed for printing correctly when using a Teensy
-  Serial.println("Reading all registers from BME280");
-
-  Wire.begin();
-  
-    //***BME280/BMP280 Driver settings********************************//
-    //commInterface can be I2C_MODE or SPI_MODE
-    //specify chipSelectPin using arduino pin names
-    //specify I2C address.  Can be 0x77(default) or 0x76
-  mySensor.settings.I2CAddress = 0x76; //six lead purple board address, sensor is a BMP280 that does NOT have Humidity
-  mySensor1.settings.I2CAddress = 0x77; //six lead purple board address, sensor is a BMP280 that does NOT have Humidity
-  //mySensor.settings.I2CAddress = 0x76; //four lead purple board address, sensor is a BME280 that DOES have Humidity
-
-  if (mySensor.beginI2C() == false) //Begin communication over I2C
-  {
-    Serial.println("The 0 sensor did not respond. Please check wiring.");
-    while (1); //Freeze
-  }
-
-  if (mySensor1.beginI2C() == false) //Begin communication over I2C
-  {
-    Serial.println("The 1 sensor did not respond. Please check wiring.");
-    while (1); //Freeze
-  }
-
-  Serial.print("ID(0xD0): ");
+Serial.print("ID(0xD0): ");
   printyPrintHex(mySensor.readRegister(BME280_CHIP_ID_REG));
 
   Serial.print("Reset register(0xE0): ");
@@ -143,9 +118,8 @@ void setup()
   Serial.println();
 }
 
-void loop()
+void printReadings()
 {
-  //Each loop, take a reading.
   Serial.print("Humidity: ");
   Serial.print(mDELIMETER);
   Serial.print(mySensor.readFloatHumidity(), 0);
@@ -191,7 +165,43 @@ void loop()
   Serial.print(mDELIMETER);
 
   Serial.println();
+}
 
-  delay(1000);
+void setup()
+{
+  Serial.begin(115200);
+  while(!Serial); //Needed for printing correctly when using a Teensy
+  Serial.println("Sketch is called ESP32BME280Example5_ReadAllRegistersPIO");
+  Serial.println("Reading all registers from first BME280 designated as mySensor at address 0x76");
+
+  Wire.begin();
+  
+    //***BME280/BMP280 Driver settings********************************//
+    //commInterface can be I2C_MODE or SPI_MODE
+    //specify chipSelectPin using arduino pin names
+    //specify I2C address.  Can be 0x77(default) or 0x76
+  mySensor.settings.I2CAddress = 0x76; //six lead purple board address, sensor is a BMP280 that does NOT have Humidity
+  mySensor1.settings.I2CAddress = 0x77; //six lead purple board address, sensor is a BMP280 that does NOT have Humidity
+  //mySensor.settings.I2CAddress = 0x76; //four lead purple board address, sensor is a BME280 that DOES have Humidity
+
+  if (mySensor.beginI2C() == false) //Begin communication over I2C
+  {
+    Serial.println("The 0 sensor did not respond. Please check wiring.");
+    while (1); //Freeze
+  }
+
+  if (mySensor1.beginI2C() == false) //Begin communication over I2C
+  {
+    Serial.println("The 1 sensor did not respond. Please check wiring.");
+    while (1); //Freeze
+  }
+printRegisters();
+}
+
+void loop()
+{
+  //Each loop, take a reading.
+  printReadings();
+  delay(delayRead);
 }
 
