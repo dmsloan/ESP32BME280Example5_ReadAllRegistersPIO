@@ -25,7 +25,7 @@ BME280 mySensor;
 BME280 mySensor1;
 
 // Constants that appear in the serial message.
-const String mDELIMETER = ",";    // cordoba add-in expects a comma delimeted string, added for connection to Excel
+const String mDELIMETER = "";    // cordoba add-in expects a comma delimeted string, added for connection to Excel
 const int delayRead = 1000;      // Delay between readings
 
 //Given a value, print it in HEX with leading 0x and any leading 0s
@@ -167,6 +167,33 @@ void printReadings()
   Serial.println();
 }
 
+void printDiff()
+{
+  Serial.print("Humidity Diff: ");
+  Serial.print(mDELIMETER);
+  Serial.print(mySensor.readFloatHumidity()-mySensor1.readFloatHumidity(), 2);
+  Serial.print(mDELIMETER);
+
+  Serial.print(" Pressure Diff: ");
+  Serial.print(mDELIMETER);
+  Serial.print(mySensor.readFloatPressure()-mySensor1.readFloatPressure(), 2);
+  Serial.print(mDELIMETER);
+
+  Serial.print(" Alt Diff: ");
+  Serial.print(mDELIMETER);
+  //Serial.print(mySensor.readFloatAltitudeMeters(), 1);
+  Serial.print(mySensor.readFloatAltitudeFeet()-mySensor1.readFloatAltitudeFeet(), 2);
+  Serial.print(mDELIMETER);
+
+  Serial.print(" Temp Diff: ");
+  Serial.print(mDELIMETER);
+  //Serial.print(mySensor.readTempC(), 2);
+  Serial.print(mySensor.readTempF()-mySensor1.readTempF(), 2);
+  Serial.print(mDELIMETER);
+  Serial.println();
+  Serial.println();
+}
+
 void setup()
 {
   Serial.begin(115200);
@@ -202,6 +229,7 @@ void loop()
 {
   //Each loop, take a reading.
   printReadings();
+  printDiff();
   delay(delayRead);
 }
 
