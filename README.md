@@ -24,25 +24,27 @@ Working at this whole thing.
 I have no idea how to do this or what they are talking about.
 
 #### Issue/Bug report template
-Before reporting an issue, make sure you've searched for similar one that was already created. Also make sure to go through all the issues labelled as look here.
 
 Finally, if you're sure no one else had the issue, it's probably you.
 
 ## WEMOS LOLIN32
-board name WEMOS LOLIN32
-Must hols down button to program.
+Board name WEMOS LOLIN32.<br/>
+Must hold down button near edge to begin program.
 
-This ESP32 board requires the SSD1306 libraries to communicate with the OLED display.
+This ESP32 board requires the SSD1306 libraries to communicate with the OLED display.<br/>
 On this board the I2C communication pins to the OLED display are pin5 (SDA) and pin4 (SCL), so make sure to change the pins in the initialization: SSD1306 display(0x3c, 5, 4)
-![Pin Functions](docs/ESP32-Makerfocus-OLED-development-board.jpg)
+![Pin Functions](docs/WemosESP32OLEDTop.jpg)
+![Pin Functions](docs/WemosESP32OLEDBottom.jpg)
+![Pin Functions](docs/WemosESP32OLEDPinout.jpg)
 
 ## AdaFruit Feather32
-Adafruit HUZZAH32 – ESP32 Feather Board
-Don't need to hold anything low on the Feather.
-    I2C Connections:
-        SCL 22
-        SDA 23
-
+Adafruit HUZZAH32 – ESP32 Feather Board<br/>
+Don't need to hold anything low on the Feather.<br/>
+<ul>
+    <li>I2C Connections:</li>
+    <li>    SCL 22</li>
+    <li>    SDA 23</li>
+</ul>
 ![Pin Functions](docs/AdafruitHUZZAH32-ESP32FeatherPinoutTop.jpg)
 ![Pin Functions](docs/AdafruitHUZZAH32-ESP32FeatherPinoutBottom.jpg)
 
