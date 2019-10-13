@@ -43,8 +43,8 @@ Don't need to hold anything low on the Feather.
         SCL 22
         SDA 23
 
-![Pin Functions](docs/Adafruit'%20'HUZZAH32'%20'-'%20'ESP32'%20'Feather'%20'PinoutTop.jpg)
-![Pin Functions](docs/Adafruit'%20'HUZZAH32'%20'-'%20'ESP32'%20'Feather'%20'PinoutBottom.jpg)
+![Pin Functions](docs/AdafruitHUZZAH32-ESP32FeatherPinoutTop.jpg)
+![Pin Functions](docs/AdafruitHUZZAH32-ESP32FeatherPinoutBottom.jpg)
 
 ## BME280
 I2C address is 0x76 or 0x77 if you cut the trace between the left two pads and add a jumper to the right two pads.
