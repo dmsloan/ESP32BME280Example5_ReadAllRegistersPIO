@@ -116,6 +116,53 @@ Serial.print("ID(0xD0): ");
   Serial.println(mySensor.calibration.dig_H6);
 
   Serial.println();
+
+
+  Serial.println();
+
+  Serial.println("Reading all registers from first BME280 designated as mySensor at address 0x77");
+  Serial.println("Displaying concatenated calibration words:");
+  Serial.print("dig_T1, uint16: ");
+  Serial.println(mySensor1.calibration.dig_T1);
+  Serial.print("dig_T2, int16: ");
+  Serial.println(mySensor1.calibration.dig_T2);
+  Serial.print("dig_T3, int16: ");
+  Serial.println(mySensor1.calibration.dig_T3);
+
+  Serial.print("dig_P1, uint16: ");
+  Serial.println(mySensor1.calibration.dig_P1);
+  Serial.print("dig_P2, int16: ");
+  Serial.println(mySensor1.calibration.dig_P2);
+  Serial.print("dig_P3, int16: ");
+  Serial.println(mySensor1.calibration.dig_P3);
+  Serial.print("dig_P4, int16: ");
+  Serial.println(mySensor1.calibration.dig_P4);
+  Serial.print("dig_P5, int16: ");
+  Serial.println(mySensor1.calibration.dig_P5);
+  Serial.print("dig_P6, int16: ");
+  Serial.println(mySensor1.calibration.dig_P6);
+  Serial.print("dig_P7, int16: ");
+  Serial.println(mySensor1.calibration.dig_P7);
+  Serial.print("dig_P8, int16: ");
+  Serial.println(mySensor1.calibration.dig_P8);
+  Serial.print("dig_P9, int16: ");
+  Serial.println(mySensor1.calibration.dig_P9);
+
+  Serial.print("dig_H1, uint8: ");
+  Serial.println(mySensor1.calibration.dig_H1);
+  Serial.print("dig_H2, int16: ");
+  Serial.println(mySensor1.calibration.dig_H2);
+  Serial.print("dig_H3, uint8: ");
+  Serial.println(mySensor1.calibration.dig_H3);
+  Serial.print("dig_H4, int16: ");
+  Serial.println(mySensor1.calibration.dig_H4);
+  Serial.print("dig_H5, int16: ");
+  Serial.println(mySensor1.calibration.dig_H5);
+  Serial.print("dig_H6, int8: ");
+  Serial.println(mySensor1.calibration.dig_H6);
+
+  Serial.println();
+
 }
 
 void printReadings()
@@ -178,11 +225,11 @@ void printDiff()
 
   Serial.print(" Pressure Diff: ");
   Serial.print(mDELIMETER);
-  Serial.print((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100, 2);
+  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100)-1.2, 2);
   Serial.print(" hPa  ");
   Serial.print(mDELIMETER);
 
-  Serial.print((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100*0.40146, 2);
+  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100-1.2)*0.40146, 2);
   Serial.print(" inH2O ");
   Serial.print(mDELIMETER);
 
