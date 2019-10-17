@@ -8,9 +8,10 @@
 - [Installation Instructions](#installation-instructions)
 - [Decoding Exceptions](#decoding-exceptions)
 - [Issue/Bug report template](#issuebug-report-template)
-- [WEMOS LOLIN32 with OLED Board PINMAP](#board-name-WEMOS-LOLIN32)
-- [AdaFruit Feather32 PINMAP](#-AdaFruit-Feather32)
-- [BME280 PINMAP](#BME280)
+- [WEMOS LOLIN32 with OLED Board](#WEMOS-LOLIN32)
+- [AdaFruit Feather32](#-AdaFruit-Feather32)
+- [Heltec WiFi LORA 32 V1](#Heltec-WiFi-LORA-32-V1)
+- [BME280](#BME280)
 
 ## Development Status
 
@@ -45,8 +46,20 @@ Don't need to hold anything low on the Feather.<br/>
     <li>    SCL 22</li>
     <li>    SDA 23</li>
 </ul>
+
 ![Pin Functions](docs/AdafruitHUZZAH32-ESP32FeatherPinoutTop.jpg)
 ![Pin Functions](docs/AdafruitHUZZAH32-ESP32FeatherPinoutBottom.jpg)
+
+## Heltec WiFi LORA 32 V1
+Heltec WiFi LORA 32 V1 – ESP32 with OLED and LORA Board<br/>
+To program you need to hold button labeled PRG near coil antenna.<br/>
+<ul>
+    <li>I2C Connections:</li>
+    <li>    SCL 22</li>
+    <li>    SDA 23</li>
+</ul>
+
+![Pin Functions](docs/WiFi-LORA-32-pinout-Diagram.png)
 
 ## BME280
 I2C address is 0x76 or 0x77 if you cut the trace between the left two pads and add a jumper to the right two pads.
