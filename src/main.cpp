@@ -127,7 +127,8 @@ void printReadings()
 
   Serial.print(" Pressure: ");
   Serial.print(mDELIMETER);
-  Serial.print(mySensor.readFloatPressure(), 0);
+  Serial.print(mySensor.readFloatPressure()/100, 2);
+  Serial.print(" hPa");
   Serial.print(mDELIMETER);
 
   Serial.print(" Alt: ");
@@ -149,7 +150,8 @@ void printReadings()
 
   Serial.print(" Pressure1: ");
   Serial.print(mDELIMETER);
-  Serial.print(mySensor1.readFloatPressure(), 0);
+  Serial.print(mySensor1.readFloatPressure()/100, 2);
+  Serial.print(" hPa");
   Serial.print(mDELIMETER);
 
   Serial.print(" Alt1: ");
@@ -176,7 +178,12 @@ void printDiff()
 
   Serial.print(" Pressure Diff: ");
   Serial.print(mDELIMETER);
-  Serial.print(mySensor.readFloatPressure()-mySensor1.readFloatPressure(), 2);
+  Serial.print((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100, 2);
+  Serial.print(" hPa  ");
+  Serial.print(mDELIMETER);
+
+  Serial.print((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100*0.40146, 2);
+  Serial.print(" inH2O ");
   Serial.print(mDELIMETER);
 
   Serial.print(" Alt Diff: ");
