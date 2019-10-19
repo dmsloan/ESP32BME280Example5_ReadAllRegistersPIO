@@ -56,7 +56,7 @@ To program you need to hold button labeled PRG near coil antenna.<br/>
 <ul>
     <li>I2C Connections:</li>
     <li>    SCL 22</li>
-    <li>    SDA 23</li>
+    <li>    SDA 21</li>
 </ul>
 
 ![Pin Functions](docs/WiFi-LORA-32-pinout-Diagram.png)

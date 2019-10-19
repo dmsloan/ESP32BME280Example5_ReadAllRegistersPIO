@@ -28,6 +28,8 @@ BME280 mySensor1;
 const String mDELIMETER = "";    // cordoba add-in expects a comma delimeted string, added for connection to Excel
 const int delayRead = 1000;      // Delay between readings
 
+float pressure_correction_offset = 0.0;
+
 //Given a value, print it in HEX with leading 0x and any leading 0s
 void printyPrintHex(byte value)
 {
@@ -225,11 +227,11 @@ void printDiff()
 
   Serial.print(" Pressure Diff: ");
   Serial.print(mDELIMETER);
-  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100)-1.2, 2);
+  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100)-pressure_correcttion_offset, 2);
   Serial.print(" hPa  ");
   Serial.print(mDELIMETER);
 
-  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100-1.2)*0.40146, 2);
+  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100-pressure_correcttion_offset)*0.40146, 2);
   Serial.print(" inH2O ");
   Serial.print(mDELIMETER);
 
