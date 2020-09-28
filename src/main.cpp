@@ -27,7 +27,8 @@ BME280 mySensor1;
 // Constants that appear in the serial message.
 const String mDELIMETER = "";    // cordoba add-in expects a comma delimeted string, added for connection to Excel
 const int delayRead = 1000;      // Delay between readings
-
+const String SketchName = "Sketch is called ESP32BME280Example5_ReadAllRegistersPIO"; // 
+const String Board = "This board is an Adafruit featheresp32";    // change this in the platformio.ini file
 float pressure_correction_offset = 0.0;
 
 //Given a value, print it in HEX with leading 0x and any leading 0s
@@ -227,11 +228,11 @@ void printDiff()
 
   Serial.print(" Pressure Diff: ");
   Serial.print(mDELIMETER);
-  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100)-pressure_correcttion_offset, 2);
+  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100)-pressure_correction_offset, 2);
   Serial.print(" hPa  ");
   Serial.print(mDELIMETER);
 
-  Serial.print(((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100-pressure_correcttion_offset)*0.40146, 2);
+  Serial.print((((mySensor.readFloatPressure()-mySensor1.readFloatPressure())/100)-pressure_correction_offset)*0.40146, 2);
   Serial.print(" inH2O ");
   Serial.print(mDELIMETER);
 
@@ -254,7 +255,8 @@ void setup()
 {
   Serial.begin(115200);
   while(!Serial); //Needed for printing correctly when using a Teensy
-  Serial.println("Sketch is called ESP32BME280Example5_ReadAllRegistersPIO");
+  Serial.println(SketchName);
+  Serial.println(Board);
   Serial.println("Reading all registers from first BME280 designated as mySensor at address 0x76");
 
   Wire.begin();
