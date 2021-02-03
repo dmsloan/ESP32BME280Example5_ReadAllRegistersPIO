@@ -26,7 +26,7 @@ BME280 mySensor1;
 
 // Constants that appear in the serial message.
 const String mDELIMETER = "";    // cordoba add-in expects a comma delimeted string, added for connection to Excel
-const int delayRead = 1000;      // Delay between readings
+const int delayRead = 5000;      // Delay between readings
 const String SketchName = "Sketch is called ESP32BME280Example5_ReadAllRegistersPIO"; // 
 const String Board = "This board is an Adafruit featheresp32";    // change this in the platformio.ini file
 float pressure_correction_offset = 0.0;
@@ -78,6 +78,7 @@ Serial.print("ID(0xD0): ");
 
   Serial.println();
 
+  Serial.println("Reading all registers from first BME280 designated as mySensor at address 0x77");
   Serial.println("Displaying concatenated calibration words:");
   Serial.print("dig_T1, uint16: ");
   Serial.println(mySensor.calibration.dig_T1);
@@ -280,6 +281,10 @@ void setup()
     Serial.println("The 1 sensor did not respond. Please check wiring.");
     while (1); //Freeze
   }
+
+mySensor.setReferencePressure(101770); //given in milibars example 1013.25 is represented as 101325 which is the standard
+mySensor1.setReferencePressure(101770);
+
 printRegisters();
 }
 
@@ -289,5 +294,26 @@ void loop()
   printReadings();
   printDiff();
   delay(delayRead);
+  Serial.print("The reference pressure is ");
+  Serial.println(mySensor.getReferencePressure());
+
+  // The following block lets you change the Reference Pressure so the altimiter is more accurate
+  if (Serial.available() > 0) {
+    char buffer[] = {' ',' ',' ',' ',' ',' '}; // Receive up to 6 bytes
+//    while (!Serial.available()); // Wait for characters
+    Serial.readBytesUntil('\n', buffer, 7); // \n is a carriage return, buffer is the array to store the bytes in, 6 is the number of bytes to read
+    int incomingValue = atoi(buffer);
+    Serial.println(incomingValue);
+    mySensor.setReferencePressure(incomingValue);
+    mySensor1.setReferencePressure(incomingValue);
+    Serial.println(mySensor.getReferencePressure());
+    Serial.println(mySensor1.getReferencePressure());
+    Serial.println(incomingValue);
+  }
+  // Serial.println(mySensor1.getReferencePressure(),DEC);
+  // Serial.println(mySensor1.getReferencePressure(),HEX);
+  // Serial.println(mySensor1.getReferencePressure(),OCT);
+  // Serial.println(mySensor1.getReferencePressure(),BIN);
+
 }
 
